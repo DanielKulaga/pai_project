@@ -3,7 +3,7 @@ const router = express.Router();
 
 const PagesController = require('../controllers/PagesController');
 
-router.get('/',PagesController.home);
+router.get('/',PagesController.contacts);
 
 
-module.exports = router;
+module.exports = router

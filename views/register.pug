@@ -1,0 +1,17 @@
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
+        link(rel="stylesheet" href="main.css")
+    body
+        .wrapper
+            h1
+                | Contact Master
+            h3
+                | Podaj swoje dane:
+            form(action='/register', method='POST')
+                p
+                    | Login/e-mail:
+                    input(type='text', name='login', value='')
+                    |          Hasło:
+                    input(type='password', name='password', value='')
+                input(type='submit', value='Stwórz konto')
