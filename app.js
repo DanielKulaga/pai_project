@@ -16,6 +16,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cookieParser()); //obsluga cookies
 
+app.use((req, res, next) => {
+    // Get auth token from the cookies
+    const authToken = req.cookies['AuthToken'];
+    console.log("Token from cookie", authToken)
+    // Inject the user to the request
+    req.token = authToken;
+
+    next();
+});
+
 app.use('/',routes);
 app.use('/register',register);
 app.use('/login',login);

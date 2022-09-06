@@ -23,16 +23,19 @@ exports.searchUser = async (req, res) => {
     const responseFromDatabase = await data.searchUserInDatabase([login, password]);
     console.log(responseFromDatabase)
     if(responseFromDatabase[0].length === 0){
-        res.status(400).render('error');
+        res.status(400).render('error', {message: "Niepoprawny login lub hasło"});
     }else{
         const token = jwt.sign(
             { userId: responseFromDatabase[0].id, userLogin: login,},
             process.env.TOKEN_KEY,
             {
-                expiresIn: "2h",
+                expiresIn: "10s",
             }
         );
-        res.json({user:{login, token}})
+
+        res.cookie('AuthToken', token);
+
+        res.redirect('/contacts');
         console.log("dane poprawne" , responseFromDatabase)
     }
 }
