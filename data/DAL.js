@@ -35,9 +35,50 @@ const searchUserInDatabase = async (userToSearch) => {
     return response;
 }
 
+const saveTokenIntoDatabase = async (userInfo) => {
+    const sql = 'UPDATE users SET token=? WHERE id=?';
+    let response = [];
+    console.log("Save token to DB for", userInfo);
+    try {
+        response = await pool.query(sql, [userInfo][0],[userInfo][1]);
+    } catch (err) {
+        console.error("DB error", err.sqlMessage)
+        throw err.sqlMessage;
+    }
+    return response;
+}
+
+const getTokenFromDatabase = async (userId) => {
+    const sql = 'SELECT token FROM users WHERE id=?';
+    let response = [];
+    try {
+        response = await pool.query(sql, userId);
+    } catch (err) {
+        console.error("DB", err.sqlMessage)
+        throw err.sqlMessage;
+    }
+    return response;
+}
+
+const removeTokenFromDatabase = async (userId) => {
+    console.log("logout user id", userId)
+    const sql = 'UPDATE users SET token = NULL WHERE id = ?';
+    let response = [];
+    try {
+        response = await pool.query(sql, userId);
+    } catch (err) {
+        console.error("DB", err.sqlMessage)
+        throw err.sqlMessage;
+    }
+    return response;
+}
+
 module.exports = {
     addUserToDatabase,
     searchUserInDatabase,
+    saveTokenIntoDatabase,
+    getTokenFromDatabase,
+    removeTokenFromDatabase
 }
 
 

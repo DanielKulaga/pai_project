@@ -23,12 +23,18 @@ app.use((req, res, next) => {
     // Inject the user to the request
     req.token = authToken;
 
+    // Get userId from the cookies
+    const userId = req.cookies['UserId'];
+    console.log("UserId from cookie", userId)
+    req.userId = userId;
+
     next();
 });
 
 app.use('/',routes);
 app.use('/register',register);
 app.use('/login',login);
+app.use('/logout',login);
 app.use('/contacts',contacts);
 
 module.exports = app;

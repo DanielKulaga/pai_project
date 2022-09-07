@@ -6,5 +6,6 @@ const FormController = require('../controllers/FormController');
 
 router.get('/',PagesController.login);
 router.post('/',FormController.searchUser);
+router.delete('/',FormController.logoutUser);
 
 module.exports = router;

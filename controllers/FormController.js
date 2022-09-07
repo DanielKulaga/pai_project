@@ -1,6 +1,15 @@
 const data = require('../data/DAL')
 const jwt = require("jsonwebtoken");
 
+function generateAccessToken(id, login) {
+    return jwt.sign(
+        { userId: id, userLogin: login},
+        process.env.TOKEN_KEY,
+        {
+            expiresIn: "1000s",
+        });
+}
+
 exports.addUser = async (req, res) => {
     const body = req.body;     //odczytanie informacji z requesta, ktore sa w body
     let login = body.login;
@@ -19,24 +28,38 @@ exports.searchUser = async (req, res) => {
     const body = req.body;     //odczytanie informacji z requesta, ktore sa w body
     let login = body.login;
     let password = body.password;
-    //console.log(login + " " + password);
     const responseFromDatabase = await data.searchUserInDatabase([login, password]);
-    console.log(responseFromDatabase)
-    if(responseFromDatabase[0].length === 0){
-        res.status(400).render('error', {message: "Niepoprawny login lub hasło"});
-    }else{
-        const token = jwt.sign(
-            { userId: responseFromDatabase[0].id, userLogin: login,},
-            process.env.TOKEN_KEY,
-            {
-                expiresIn: "10s",
-            }
-        );
+    console.log("User response from DB", responseFromDatabase[0][0]);
 
-        res.cookie('AuthToken', token);
+    const userFromDB = responseFromDatabase[0][0];
+
+    if(responseFromDatabase[0].length === 0) {
+        res.status(400).render('error', {message: "Niepoprawny login lub hasło"});
+    } else {
+        const accessToken = generateAccessToken(userFromDB.id, login);
+
+        try {
+            await data.saveTokenIntoDatabase([accessToken, userFromDB.id])
+        }catch(err){
+            console.log("Error", err);
+        }
+
+        res.cookie('AuthToken', accessToken);
+        res.cookie('UserId', userFromDB.id);
 
         res.redirect('/contacts');
-        console.log("dane poprawne" , responseFromDatabase)
     }
+}
+
+exports.logoutUser = async (req, res) => {
+    const userID = req.cookies['UserId'];
+    try {
+        await data.removeTokenFromDatabase(userID);
+    }catch(err){
+        console.log("Error", err);
+    }
+    res.cookie('AuthToken', undefined);
+    res.cookie('UserId', undefined);
+    res.redirect('/');
 }
 
