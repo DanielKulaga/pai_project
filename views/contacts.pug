@@ -8,3 +8,15 @@ html
                 | Contact Master
             h2
                 | Udalo ci sie zalogowac, oto twoje kontakty:
+
+        .contacts-list
+                each contact in data
+                    .contact
+                        .name
+                            p #{contact.contactName}
+                            p #{contact.contactSurname}
+                        .email
+                            p #{contact.contactMail}
+                            p #{contact.contactStreetNumber}
+                            p #{contact.nameCity}
+                            p #{contact.contactZipCode}

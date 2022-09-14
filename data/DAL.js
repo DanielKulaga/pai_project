@@ -73,12 +73,25 @@ const removeTokenFromDatabase = async (userId) => {
     return response;
 }
 
+const getContactsForUserId = async (userId) => {
+    const sql = 'SELECT contactName,contactSurname,contactMail,contactStreetNumber,nameCity,contactZipCode FROM contacts WHERE userId=?';
+    let response = [];
+    try {
+        response = await pool.query(sql, userId);
+    } catch (err) {
+        console.error("DB", err.sqlMessage)
+        throw err.sqlMessage;
+    }
+    return response;
+}
+
 module.exports = {
     addUserToDatabase,
     searchUserInDatabase,
     saveTokenIntoDatabase,
     getTokenFromDatabase,
-    removeTokenFromDatabase
+    removeTokenFromDatabase,
+    getContactsForUserId,
 }
 
 
