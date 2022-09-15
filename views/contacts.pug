@@ -8,15 +8,20 @@ html
                 | Contact Master
             h2
                 | Udalo ci sie zalogowac, oto twoje kontakty:
-
+            a(href="/addcontact")
+                button.log-button Dodaj nowy kontakt
         .contacts-list
                 each contact in data
                     .contact
                         .name
                             p #{contact.contactName}
                             p #{contact.contactSurname}
-                        .email
                             p #{contact.contactMail}
+                        .email
+                            each number in contact.numbers
+                                p #{number.phoneType}
+                                p #{number.number}
+                        .address
                             p #{contact.contactStreetNumber}
                             p #{contact.nameCity}
                             p #{contact.contactZipCode}

@@ -1,0 +1,40 @@
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
+        link(rel="stylesheet" href="main.css")
+    body
+        .wrapper
+            h1
+                | Contact Master
+            section.addcontact-section.section
+                h3 Dodaj kontakt
+                form.add-contact-form(action='/addcontact' method='post')
+                    br
+                    label(for='name') Imie:
+                    br
+                    input#name(type='text' name='contactName' required='')
+                    br
+                    br
+                    label(for='surname') Nazwisko:
+                    br
+                    input#surname(name='contactSurname' required='')
+                    br
+                    br
+                    label(for='email') E-mail:
+                    br
+                    input#email(type='text' name='contactMail' required='')
+                    br
+                    label(for='contactStreetNumber') Ulica i nr domu:
+                    br
+                    input#contactStreetNumber(type='text' name='contactStreetNumber' required='')
+                    br
+                    label(for='zipcode') Kod pocztowy:
+                    br
+                    input#zipcode(type='text' name='contactZipCode' required='')
+                    br
+                    br
+                    label(for='nameCity') Miasto:
+                    br
+                    input#nameCity(type='text' name='nameCity' required='')
+                    br
+                    button(type='submit' value='Submit') Idz do numeru telefonu

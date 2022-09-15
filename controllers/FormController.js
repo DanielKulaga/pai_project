@@ -63,3 +63,32 @@ exports.logoutUser = async (req, res) => {
     res.redirect('/');
 }
 
+exports.addContact = async (req, res) => {
+    const body = req.body;     //odczytanie informacji z requesta, ktore sa w body
+    const userId = req.userId;
+
+    let user = {};
+    try {
+        user = await data.addNewContact({...body, userId});
+    }catch(err){
+        res.status(400).render('error',{message:err});
+    }
+    res.redirect('/addnumber')
+
+}
+
+exports.addNumber = async (req, res) => {
+    const body = req.body;     //odczytanie informacji z requesta, ktore sa w body
+    const phoneNumberID = req.phoneNumberID;
+
+    let user = {};
+    try {
+        user = await data.addNewNumber({...body, phoneNumberID});
+        alert("Udało sie dodac nowy kontakt do bazy!")
+    }catch(err){
+        res.status(400).render('error',{message:err});
+    }
+    res.redirect('/contacts')
+
+}
+

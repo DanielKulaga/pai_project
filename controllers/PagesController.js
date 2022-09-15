@@ -22,6 +22,14 @@ exports.contacts = async (req, res) => {
     } catch(err) {
         res.status(400).render('error',{message:err});
     }
-    console.log("Contacts ", contacts[0])
-    res.render('contacts', {data: contacts[0]})
+    console.log("Contacts ", contacts)
+    res.render('contacts', {data: contacts})
+}
+
+exports.addcontact = (req, res) => {
+    res.render('addcontact')
+}
+
+exports.addnumber = (req, res) => {
+    res.render('addnumber')
 }

@@ -1,0 +1,27 @@
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
+        link(rel="stylesheet" href="main.css")
+    body
+        .wrapper
+            h1
+                | Contact Master
+            section.addcontact-section.section
+                h3 Dodaj numer kontaktu
+                form.add-number-form(action='/addnumber' method='post')
+                    br
+                    label(for='typeNum') Rodzaj numeru:
+                    br
+                    br
+                    select#typeNum(name='phoneType')
+                        option(value='Fax') Fax
+                        option(value='Stacjonarny') Stacjonarny
+                        option(value='Komórka') Komorka
+                    br
+                    br
+                    label(for='number') Numer:
+                    br
+                    input#number(type='text' name='number' required='')
+                    br
+                    br
+                    button(type='submit' value='Submit') Dodaj kontakt do bazy

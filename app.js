@@ -6,6 +6,8 @@ const routes = require('./routes/index')
 const register = require('./routes/register')
 const login = require('./routes/login')
 const contacts = require('./routes/contacts')
+const addcontact = require('./routes/addcontact')
+const addnumber = require('./routes/addnumber')
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -36,5 +38,7 @@ app.use('/register',register);
 app.use('/login',login);
 app.use('/logout',login);
 app.use('/contacts',contacts);
+app.use('/addcontact', addcontact);
+app.use('/addnumber', addnumber);
 
 module.exports = app;
