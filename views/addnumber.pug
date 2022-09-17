@@ -1,14 +1,14 @@
 html
     head
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
-        link(rel="stylesheet" href="main.css")
+        link(rel="stylesheet" href="/main.css")
     body
         .wrapper
             h1
                 | Contact Master
             section.addcontact-section.section
                 h3 Dodaj numer kontaktu
-                form.add-number-form(action='/addnumber' method='post')
+                form.add-number-form(action= contactId.contactId method='post')
                     br
                     label(for='typeNum') Rodzaj numeru:
                     br
@@ -24,4 +24,4 @@ html
                     input#number(type='text' name='number' required='')
                     br
                     br
-                    button(type='submit' value='Submit') Dodaj kontakt do bazy
+                    button(type='submit' value='Submit') Dodaj numer

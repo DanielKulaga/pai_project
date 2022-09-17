@@ -52,6 +52,7 @@ exports.searchUser = async (req, res) => {
 }
 
 exports.logoutUser = async (req, res) => {
+    console.log('Logout')
     const userID = req.cookies['UserId'];
     try {
         await data.removeTokenFromDatabase(userID);
@@ -73,18 +74,18 @@ exports.addContact = async (req, res) => {
     }catch(err){
         res.status(400).render('error',{message:err});
     }
-    res.redirect('/addnumber')
-
+    console.log("User: " , user);
+    res.redirect('/contacts');
 }
 
 exports.addNumber = async (req, res) => {
     const body = req.body;     //odczytanie informacji z requesta, ktore sa w body
-    const phoneNumberID = req.phoneNumberID;
+    const contactId = req.params.contactId;
 
     let user = {};
     try {
-        user = await data.addNewNumber({...body, phoneNumberID});
-        alert("Udało sie dodac nowy kontakt do bazy!")
+        user = await data.addNewNumber({...body, contactId});
+        console.log("Udało sie dodac nowy kontakt do bazy!")
     }catch(err){
         res.status(400).render('error',{message:err});
     }

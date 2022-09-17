@@ -83,15 +83,15 @@ const getContactsForUserId = async (userId) => {
         throw err.sqlMessage;
     }
     let contactsArray = [];
-    console.log("Response[0]",contactsArray);
+    // console.log("Response[0]",contactsArray);
     if(response[0].length !== 0){
        for(const contact of response[0]){
-            console.log("contact: " + contact)
+            // console.log("contact: " + contact)
         const numbers = await getContactsForContactId(contact.contactID);
-            console.log("Numbers:" , numbers)
+            // console.log("Numbers:" , numbers)
            contactsArray.push({...contact, numbers:numbers})
     }}
-    console.log("Odpowiedz z bazy danych", contactsArray)
+    // console.log("Odpowiedz z bazy danych", contactsArray)
     return contactsArray;
 }
 

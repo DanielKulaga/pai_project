@@ -8,6 +8,8 @@ const login = require('./routes/login')
 const contacts = require('./routes/contacts')
 const addcontact = require('./routes/addcontact')
 const addnumber = require('./routes/addnumber')
+const logout = require('./routes/logout')
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +38,7 @@ app.use((req, res, next) => {
 app.use('/',routes);
 app.use('/register',register);
 app.use('/login',login);
-app.use('/logout',login);
+app.use('/logout',logout);
 app.use('/contacts',contacts);
 app.use('/addcontact', addcontact);
 app.use('/addnumber', addnumber);

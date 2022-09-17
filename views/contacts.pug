@@ -3,6 +3,9 @@ html
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
         link(rel="stylesheet" href="main.css")
     body
+        nav
+            a(href="/logout")
+                 button.log-button Wyloguj
         .wrapper
             h1
                 | Contact Master
@@ -21,6 +24,9 @@ html
                             each number in contact.numbers
                                 p #{number.phoneType}
                                 p #{number.number}
+
+                            a(href="/addnumber/" + contact.contactID)
+                                button.log-button Dodaj numer
                         .address
                             p #{contact.contactStreetNumber}
                             p #{contact.nameCity}
