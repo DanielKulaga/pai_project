@@ -29,7 +29,6 @@ exports.searchUser = async (req, res) => {
     let login = body.login;
     let password = body.password;
     const responseFromDatabase = await data.searchUserInDatabase([login, password]);
-    console.log("User response from DB", responseFromDatabase[0][0]);
 
     const userFromDB = responseFromDatabase[0][0];
 
@@ -52,7 +51,6 @@ exports.searchUser = async (req, res) => {
 }
 
 exports.logoutUser = async (req, res) => {
-    console.log('Logout')
     const userID = req.cookies['UserId'];
     try {
         await data.removeTokenFromDatabase(userID);
@@ -74,7 +72,6 @@ exports.addContact = async (req, res) => {
     }catch(err){
         res.status(400).render('error',{message:err});
     }
-    console.log("User: " , user);
     res.redirect('/contacts');
 }
 

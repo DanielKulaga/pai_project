@@ -23,13 +23,10 @@ app.use(cookieParser()); //obsluga cookies
 app.use((req, res, next) => {
     // Get auth token from the cookies
     const authToken = req.cookies['AuthToken'];
-    console.log("Token from cookie", authToken)
     // Inject the user to the request
     req.token = authToken;
-
     // Get userId from the cookies
     const userId = req.cookies['UserId'];
-    console.log("UserId from cookie", userId)
     req.userId = userId;
 
     next();
